@@ -11,10 +11,10 @@ Package('org.quickcorp.custom.components',[
         instance:component,
         name:'data',
         value: {
-          days: '5 days',
-          hours: '1 hour',
-          minutes: '2 minutes',
-          seconds: '1 second'
+          days: '0 days',
+          hours: '0 hour',
+          minutes: '0 minutes',
+          seconds: '0 second'
         },
         fset:function (value){
           console.log(value);
@@ -25,7 +25,6 @@ Package('org.quickcorp.custom.components',[
               subcomponent.body.subelements(elementSelector).forEach(element => {
                 element.innerHTML = subcomponent.data[digit];
                 element.style.display = 'block';
-                Fade.apply(element, 0, 1);
               });
             }
             updateDigit('days',component.data);

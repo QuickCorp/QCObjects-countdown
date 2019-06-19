@@ -13,19 +13,6 @@ Package('org.quickcorp.custom.controllers',[
 		done:function(){
 			var controller = this;
 
-			/*
-			Timer.thread({
-		      duration:300,
-		      timing(timeFraction,elapsed){
-		        return timeFraction;
-		      },
-		      intervalInterceptor(progress){
-								if (progress>=100 && !Component._bindroute.__assigned){
-									controller.component.route();
-								}
-		      }
-		  });
-			*/
 
 
 		}
@@ -103,23 +90,50 @@ Package('org.quickcorp.custom.controllers',[
 		done: function (){
 			this.loadInstallerButton();
 		}
-	}),
-  Class('Controller1',Controller,{
-    dependencies:[],
-    component:null,
-    _new_:function (o){
-      this.__new__(o);
-      var controller=this;
-      //TODO: Implement
-    }
   }),
-  Class('Controller2',Controller,{
-    dependencies:[],
-    component:null,
-    _new_:function (o){
-      this.__new__(o);
-      var controller=this;
-      //TODO: Implement
+  Class('CountdownController',Controller,{
+  dependencies:[],
+  component:null,
+  interval(remaining){
+    var controller = this;
+    var component = controller.component;
+    var intervalDate = new Date(1970, 0, 1);
+    intervalDate.setSeconds(remaining);
+    component.data = {
+      days: Math.floor(intervalDate.valueOf() / 8.64e7).toString() + ' days',
+      hours: intervalDate.getHours().toString() + ' hour',
+      minutes: intervalDate.getMinutes().toString() + ' minute',
+      seconds: intervalDate.getSeconds().toString() + ' seconds'
     }
-  }),
+  },
+  _new_:function (o){
+  },
+  done:function (){
+    var controller = this;
+    var component = controller.component;
+    var dateTo = new Date('31 Dec 2019 00:00:00 GMT');
+    var dateNow = new Date();
+    Timer.alive=true;
+    var duration = Math.abs(dateTo.valueOf()-dateNow.valueOf());
+    this.thread = {
+      duration: duration,
+      timing(timeFraction, elapsed) {
+        var tolerance = 0.0085; // change this in order to detect better a seconds interval
+        component.data.elapsed = elapsed;
+        var remaining = Math.round(Math.round(duration - elapsed) / 1000);
+        var a_second = Math.abs((elapsed / 1000) - Math.round(elapsed / 1000))<tolerance;
+        if (a_second){
+          controller.interval(remaining);
+        }
+        return timeFraction;
+      },
+      intervalInterceptor(progress) {
+        if (progress == 100) {
+          Timer.alive = false;
+        }
+      }
+    }
+    Timer.thread(this.thread);
+  }
+  })  
 ]);
