@@ -20,18 +20,18 @@ Package('org.quickcorp.custom.components',[
           console.log(value);
           component.subcomponents.map(function (subcomponent){
             subcomponent.data = component.data;
-            subcomponent.body.subelements('component[data-days]:not([data-days=""]) .card .container h1').forEach(element => {
-              element.innerHTML = subcomponent.data.days;
-            });
-            subcomponent.body.subelements('component[data-hours]:not([data-hours=""]) .card .container h1').forEach(element => {
-              element.innerHTML = subcomponent.data.hours;
-            });
-            subcomponent.body.subelements('component[data-minutes]:not([data-minutes=""]) .card .container h1').forEach(element => {
-              element.innerHTML = subcomponent.data.minutes;
-            });
-            subcomponent.body.subelements('component[data-seconds]:not([data-seconds=""]) .card .container h1').forEach(element => {
-              element.innerHTML = subcomponent.data.seconds;
-            });
+            var updateDigit = function (digit,data){
+              var elementSelector = 'component[data-'+digit+']:not([data-'+digit+'=""]) .card .container h1';
+              subcomponent.body.subelements(elementSelector).forEach(element => {
+                element.innerHTML = subcomponent.data[digit];
+                element.style.display = 'block';
+                Fade.apply(element, 0, 1);
+              });
+            }
+            updateDigit('days',component.data);
+            updateDigit('hours', component.data);
+            updateDigit('minutes', component.data);
+            updateDigit('seconds', component.data);
 
           })
         },
