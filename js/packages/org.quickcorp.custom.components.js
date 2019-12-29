@@ -25,12 +25,12 @@ Package('org.quickcorp.custom.components',[
               subcomponent.body.subelements(elementSelector).forEach(element => {
                 element.innerHTML = subcomponent.data[digit];
                 element.style.display = 'block';
-                RotateX.duration = 500;
+                RotateX.duration = 350;
                 var effects = {
-                                'days':function (){RotateX.apply(component.body,0,360)},
-                                'hours':function (){RotateX.apply(component.body,240,0)},
-                                'minutes':function (){RotateX.apply(component.body,0,360)},
-                                'seconds':function (){RotateX.apply(component.body,180,0)},
+                                'days':function (){component.body.style.transformOrigin='top';RotateX.apply(component.body,240,360)},
+                                'hours':function (){component.body.style.transformOrigin='center';RotateX.apply(component.body,180,0)},
+                                'minutes':function (){component.body.style.transformOrigin='center';RotateX.apply(component.body,180,360)},
+                                'seconds':function (){component.body.style.transformOrigin='bottom';RotateX.apply(component.body,360,0)},
                               };
                 effects[digit].call(this);
               });

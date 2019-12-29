@@ -4,6 +4,7 @@
     width: 100%;
     height: auto;
     border-radius: 30px;
+    aspect-ratio: 1/1;
 }
 
 .card:hover {
@@ -11,7 +12,7 @@
 }
 
 .card > .container {
-    padding: 2px 16px;
+    padding: 16px 16px;
 }
 
 .card > img {
