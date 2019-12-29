@@ -1,8 +1,16 @@
 <component cached=false name="grid" template-source="none">
-    <component cached=false data-days="{{days}}" data-hours="" data-minutes=""
-        data-seconds="" name="card"></component>
-    <component cached=false  data-days="" data-hours="{{hours}}"
-        data-minutes="" data-seconds="" name="card"></component>
-    <component cached=false data-days="" data-hours="" data-minutes="{{minutes}}" data-seconds="" name="card"></component>
-    <component cached=false data-days="" data-hours="" data-minutes="" data-seconds="{{seconds}}" name="card"></component>
+    <component componentClass="CountdownComponent" controllerClass="CountdownController" name="blank" cached=false >
+      <component cached=false data-days="{{days}}" data-hours="" data-minutes=""
+          data-seconds="" name="card" ></component>
+    </component>
+    <component componentClass="CountdownComponent" controllerClass="CountdownController" name="blank" cached=false >
+      <component cached=false  data-days="" data-hours="{{hours}}"
+          data-minutes="" data-seconds="" name="card"></component>
+    </component>
+    <component componentClass="CountdownComponent" controllerClass="CountdownController" name="blank" cached=false >
+      <component cached=false data-days="" data-hours="" data-minutes="{{minutes}}" data-seconds="" name="card"></component>
+    </component>
+    <component componentClass="CountdownComponent" controllerClass="CountdownController" name="blank" cached=false >
+      <component cached=false data-days="" data-hours="" data-minutes="" data-seconds="{{seconds}}" name="card"></component>
+    </component>
 </component>

@@ -17,7 +17,7 @@ Package('org.quickcorp.custom.components',[
           seconds: '0 second'
         },
         fset:function (value){
-          console.log(value);
+//          console.log(value);
           component.subcomponents.map(function (subcomponent){
             subcomponent.data = component.data;
             var updateDigit = function (digit,data){
@@ -25,6 +25,14 @@ Package('org.quickcorp.custom.components',[
               subcomponent.body.subelements(elementSelector).forEach(element => {
                 element.innerHTML = subcomponent.data[digit];
                 element.style.display = 'block';
+                RotateX.duration = 500;
+                var effects = {
+                                'days':function (){RotateX.apply(component.body,0,360)},
+                                'hours':function (){RotateX.apply(component.body,240,0)},
+                                'minutes':function (){RotateX.apply(component.body,0,360)},
+                                'seconds':function (){RotateX.apply(component.body,180,0)},
+                              };
+                effects[digit].call(this);
               });
             }
             updateDigit('days',component.data);
@@ -40,6 +48,6 @@ Package('org.quickcorp.custom.components',[
       })
     }
   })
-  
+
 
 ]);

@@ -107,8 +107,11 @@ Package('org.quickcorp.custom.controllers', [
         seconds: intervalDate.getSeconds().toString() + ' seconds'
       }
     },
-    _new_: function(o) {},
+    _new_: function(o) {
+      global.set('countdownController',this);
+    },
     done: function() {
+      console.log('controller ');
       var controller = this;
       var component = controller.component;
       var dateTo = new Date('31 Dec 2019 00:00:00 GMT');
