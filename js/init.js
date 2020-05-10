@@ -1,4 +1,5 @@
 'use strict';
+CONFIG.set('countdownFinalDate','31 Dec 2020 00:00:00 GMT');
 CONFIG.set('relativeImportPath', 'js/packages/');
 CONFIG.set('componentsBasePath', 'templates/components/');
 CONFIG.set('delayForReady', 1); // delay to wait before executing the first ready event, it includes imports
