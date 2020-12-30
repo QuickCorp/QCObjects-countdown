@@ -114,7 +114,7 @@ Package('org.quickcorp.custom.controllers', [
       console.log('controller ');
       var controller = this;
       var component = controller.component;
-      var dateTo = new Date(CONFIG.get('countdownFinalDate','31 Dec 2020 00:00:00 GMT'));
+      var dateTo = new Date(CONFIG.get('countdownFinalDate','31 Dec 2021 00:00:00 GMT'));
       var dateNow = new Date();
       Timer.alive = true;
       var duration = Math.abs(dateTo.valueOf() - dateNow.valueOf());
