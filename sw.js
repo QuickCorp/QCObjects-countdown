@@ -26,11 +26,12 @@
 const version = "0.0.1";
 const appName = "qcobjects-countdown";
 const cacheName = `qcobjects-app-${appName}-${version}`;
+const start_url = "/?homescreen=1";
+caches.delete(cacheName); // force to reload cache for the first time the sw is loaded
 self.addEventListener('install', e => {
   e.waitUntil(
     caches.open(cacheName).then(cache => {
-      return cache.addAll([
-	"/",
+      return cache.addAll([`${start_url}`,
 	"README.md",
 	"css/components/card.css",
 	"css/desktop/container.css",
@@ -70,11 +71,7 @@ self.addEventListener('install', e => {
 	"js/packages/org.quickcorp.custom.js",
 	"js/packages/org.quickcorp.custom.models.js",
 	"js/packages/org.quickcorp.custom.views.js",
-	"localhost-cert.pem",
-	"localhost-privkey.pem",
 	"manifest.json",
-	"package-lock.json",
-	"package.json",
 	"templates/components/article1.tpl.html",
 	"templates/components/article2.tpl.html",
 	"templates/components/article3.tpl.html",

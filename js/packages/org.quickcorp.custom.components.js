@@ -17,20 +17,19 @@ Package('org.quickcorp.custom.components',[
           seconds: '0 second'
         },
         fset:function (value){
-//          console.log(value);
           component.subcomponents.map(function (subcomponent){
             subcomponent.data = component.data;
             var updateDigit = function (digit,data){
               var elementSelector = 'component[data-'+digit+']:not([data-'+digit+'=""]) .card .container h1';
               subcomponent.body.subelements(elementSelector).forEach(element => {
-                element.innerHTML = subcomponent.data[digit];
+                element.style.textAlign="center";
+                element.innerHTML = data[digit];
                 element.style.display = 'block';
-                RotateX.duration = 350;
                 var effects = {
-                                'days':function (){component.body.style.transformOrigin='top';RotateX.apply(component.body,240,360)},
-                                'hours':function (){component.body.style.transformOrigin='center';RotateX.apply(component.body,180,0)},
-                                'minutes':function (){component.body.style.transformOrigin='center';RotateX.apply(component.body,180,360)},
-                                'seconds':function (){component.body.style.transformOrigin='bottom';RotateX.apply(component.body,360,0)},
+                                'days':function (){var effect = New(RotateX);effect.duration = 350;component.body.style.transformOrigin='bottom';effect.apply(component.body,240,360)},
+                                'hours':function (){var effect = New(RotateX);effect.duration = 320;component.body.style.transformOrigin='top';effect.apply(component.body,180,0)},
+                                'minutes':function (){var effect = New(RotateX);effect.duration = 280;component.body.style.transformOrigin='bottom';effect.apply(component.body,180,360)},
+                                'seconds':function (){var effect = New(RotateX);effect.duration = 200;component.body.style.transformOrigin='top';effect.apply(component.body,360,0)},
                               };
                 effects[digit].call(this);
               });
@@ -45,9 +44,7 @@ Package('org.quickcorp.custom.components',[
         fget: function (data){
           return data;
         }
-      })
+      });
     }
   })
-
-
 ]);

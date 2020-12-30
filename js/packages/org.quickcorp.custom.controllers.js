@@ -82,7 +82,7 @@ Package('org.quickcorp.custom.controllers', [
     component: null,
     installer: null,
     loadInstallerButton: function() {
-      this.installer = new Installer(this.component.body.subelements('#installerbutton')[0]);
+//      this.installer = new Installer(this.component.body.subelements('#installerbutton')[0]);
     },
     _new_: function(o) {
       this.__new__(o);
@@ -114,7 +114,7 @@ Package('org.quickcorp.custom.controllers', [
       console.log('controller ');
       var controller = this;
       var component = controller.component;
-      var dateTo = new Date('31 Dec 2019 00:00:00 GMT');
+      var dateTo = new Date(CONFIG.get('countdownFinalDate','31 Dec 2020 00:00:00 GMT'));
       var dateNow = new Date();
       Timer.alive = true;
       var duration = Math.abs(dateTo.valueOf() - dateNow.valueOf());
@@ -122,7 +122,6 @@ Package('org.quickcorp.custom.controllers', [
         duration: duration,
         timing(timeFraction, elapsed) {
           var tolerance = 0.0085; // change this in order to detect better a seconds interval
-          component.data.elapsed = elapsed;
           var remaining = Math.round(Math.round(duration - elapsed) / 1000);
           var a_second = Math.abs((elapsed / 1000) - Math.round(elapsed / 1000)) < tolerance;
           if (a_second) {
@@ -133,6 +132,7 @@ Package('org.quickcorp.custom.controllers', [
         intervalInterceptor(progress) {
           if (progress == 100) {
             Timer.alive = false;
+            delete controller.thread;
           }
         }
       }
